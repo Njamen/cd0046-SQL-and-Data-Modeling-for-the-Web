@@ -8,7 +8,16 @@ DEBUG = True
 
 # Connect to the database
 
+
 # TODO IMPLEMENT DATABASE URL
 SQLALCHEMY_DATABASE_URI = 'postgresql://admin:pass_admin@localhost:5432/fyyur_db'
 
 
+
+DATABASE_NAME = "school_db"
+DATABASE_USER = "admin"
+DATABASE_USER_PASSWORD = "pass_admin"
+
+CONNECTION_STRING = "dbname={} user={} password={}".format(
+  DATABASE_NAME , DATABASE_USER  ,DATABASE_USER_PASSWORD
+)
