@@ -10,7 +10,7 @@ class Venue(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    # "genres": ["Jazz", "Reggae", "Swing", "Classical", "Folk"], 
+    #   "genres": ["Jazz", "Reggae", "Swing", "Classical", "Folk"], 
     city = db.Column(db.String(120))
     state = db.Column(db.String(120))
     address = db.Column(db.String(120))
@@ -18,8 +18,14 @@ class Venue(db.Model):
     # "website": "https://www.themusicalhop.com",
     # "seeking_talent": True,
     # "seeking_description": "We are on the lookout for a local artist to play every two weeks. Please call us.",
+
+
+
     image_link = db.Column(db.String(500))
-    facebook_link = db.Column(db.String(120))     
+    facebook_link = db.Column(db.String(120))
+
+
+      
 
     # TODO: implement any missing fields, as a database migration using Flask-Migrate
 

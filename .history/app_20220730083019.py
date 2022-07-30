@@ -26,16 +26,12 @@ db = SQLAlchemy(app)
 
 # TODO: connect to a local postgresql database
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+migrate = Migrate(app, db)
 
 from models import *
 
 
-migrate = Migrate(app, db)
-
-
-
-
-# db.create_all()
+db.create_all()
 
 # migrate = Migrate(app, db)
 
