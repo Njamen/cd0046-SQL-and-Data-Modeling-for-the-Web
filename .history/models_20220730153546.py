@@ -34,9 +34,10 @@ class Artist(db.Model):
     genres = db.Column(db.String(120))
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
-    seeking_venue = db.Column( db.Boolean(), default=False, nullable=False ) 
-    website =  db.Column(db.String(120))   
-    seeking_description = db.Column(db.String(200), default = "" )  
+    seeking_venue": True,
+
+    #     "website": "https://www.gunsnpetalsband.com",
+        # "seeking_description": "Looking for shows to perform at in the San Francisco Bay Area!",
 
 
 
