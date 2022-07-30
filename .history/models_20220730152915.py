@@ -15,9 +15,9 @@ class Venue(db.Model):
     state = db.Column(db.String(120))
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
-    website = db.Column(db.String(120))   
+    website = db.Column(db.String(120))   #"https://www.themusicalhop.com",
     seeking_talent = db.Column( db.Boolean(), default=False ) 
-    seeking_description = db.Column(db.String(200), default = "" )  
+    seeking_description = db.Column(db.String(200), default = "" )   #""We are on the lookout for a local artist to play every two weeks. Please call us.",
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))     
 

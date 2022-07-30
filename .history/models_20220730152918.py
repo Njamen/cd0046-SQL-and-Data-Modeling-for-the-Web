@@ -17,7 +17,7 @@ class Venue(db.Model):
     phone = db.Column(db.String(120))
     website = db.Column(db.String(120))   
     seeking_talent = db.Column( db.Boolean(), default=False ) 
-    seeking_description = db.Column(db.String(200), default = "" )  
+    seeking_description = db.Column(db.String(200), default = "" )   #""We are on the lookout for a local artist to play every two weeks. Please call us.",
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))     
 
