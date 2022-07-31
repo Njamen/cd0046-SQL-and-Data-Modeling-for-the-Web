@@ -482,7 +482,8 @@ def create_artist_submission():
 
   # called upon submitting the new artist listing form
   # TODO: insert form data as a new Venue record in the db, instead
-  # TODO: modify data to be the data object returned from db insertion 
+  # TODO: modify data to be the data object returned from db insertion
+
   # on successful db insert, flash success   
   # TODO: on unsuccessful db insert, flash an error instead.
   # e.g., flash('An error occurred. Artist ' + data.name + ' could not be listed.')
