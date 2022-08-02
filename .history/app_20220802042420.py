@@ -270,10 +270,17 @@ def artists():
 
   all_artist = Artist.query.with_entities(Artist.id,Artist.name).all()  #.filter(person.name=="Nicanora") 
 
+  print(all_artist)
+  print(type(all_artist))
 
-  data = [dict(v) for v in all_artist]
+  json = jsonify([dict(v) for v in all_artist])
 
-  data2=[{
+  print()
+  print(json)
+
+
+
+  data=[{
     "id": 4,
     "name": "Guns N Petals",
   }, {
@@ -282,7 +289,11 @@ def artists():
   }, {
     "id": 6,
     "name": "The Wild Sax Band",
-  }] 
+  }]
+
+
+
+
 
   return render_template('pages/artists.html', artists=data)
 

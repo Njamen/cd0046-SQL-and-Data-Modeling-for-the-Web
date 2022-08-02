@@ -46,15 +46,15 @@ class Artist(db.Model):
     seeking_description = db.Column(db.String(200), default = "" )  
 
     def __repr__(self):
-      return f'''<Artist ID: {self.id},\n   name: {self.name }, genres: {self.genres}, 
-                  city: {self.city},   state: {self.state }, phone : {self.phone},   
-                  website: {self.website }, seeking_venue: {self.seeking_venue},
+      return f'''<Venue ID: {self.id},\n   name: {self.name }, genres: {self.genres}, 
+                  city: {self.city},   state: {self.state }, address: {self.address},
+                  phone : {self.phone},   website: {self.website }, seeking_talent: {self.seeking_talent},
                   seeking_description : {self.seeking_description},   image_link: {self.image_link }, 
                   facebook_link: {self.facebook_link} >''' 
 
 
 
-# TODO: implement any missing fields, as a database migration using Flask-Migrate
+    # TODO: implement any missing fields, as a database migration using Flask-Migrate
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 

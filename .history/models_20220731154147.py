@@ -47,14 +47,14 @@ class Artist(db.Model):
 
     def __repr__(self):
       return f'''<Artist ID: {self.id},\n   name: {self.name }, genres: {self.genres}, 
-                  city: {self.city},   state: {self.state }, phone : {self.phone},   
-                  website: {self.website }, seeking_venue: {self.seeking_venue},
+                  city: {self.city},   state: {self.state }, 
+                  phone : {self.phone},   website: {self.website }, seeking_venue: {self.seeking_venue},
                   seeking_description : {self.seeking_description},   image_link: {self.image_link }, 
                   facebook_link: {self.facebook_link} >''' 
 
 
 
-# TODO: implement any missing fields, as a database migration using Flask-Migrate
+    # TODO: implement any missing fields, as a database migration using Flask-Migrate
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 

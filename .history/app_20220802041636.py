@@ -268,12 +268,16 @@ def delete_venue(venue_id):
 def artists():
   # TODO: replace with real data returned from querying the database
 
-  all_artist = Artist.query.with_entities(Artist.id,Artist.name).all()  #.filter(person.name=="Nicanora") 
+  all_artist = Artist.query.with_entities(Artist.id,Artist.name).all()  #.filter(person.name=="Nicanora")
+
+  json = jsonify(all_artist)
+
+  
+  print(json)
 
 
-  data = [dict(v) for v in all_artist]
 
-  data2=[{
+  data=[{
     "id": 4,
     "name": "Guns N Petals",
   }, {
@@ -282,7 +286,11 @@ def artists():
   }, {
     "id": 6,
     "name": "The Wild Sax Band",
-  }] 
+  }]
+
+
+
+
 
   return render_template('pages/artists.html', artists=data)
 

@@ -282,9 +282,13 @@ def artists():
   }, {
     "id": 6,
     "name": "The Wild Sax Band",
-  }] 
+  }]
 
-  return render_template('pages/artists.html', artists=data)
+
+
+
+
+  return render_template('pages/artists.html', artists=data2)
 
 @app.route('/artists/search', methods=['POST'])
 def search_artists():
