@@ -416,9 +416,9 @@ def show_artist(artist_id):
 
   past_shows = [
                   { 
-                    "venue_id" : x.artist_id,
-                    "venue_name"  : x.artist.name,
-                    "venue_image_link" : x.artist.image_link,
+                    "artist_id" : x.artist_id,
+                    "artist_name"  : x.artist.name,
+                    "artist_image_link" : x.artist.image_link,
                     "start_time" : "{}".format(x.start_time) 
                   }                    
                   for x in _past_shows  
@@ -426,9 +426,9 @@ def show_artist(artist_id):
   
   upcoming_shows = [
                       { 
-                        "venue_id" : x.artist_id,
-                        "venue_name"  : x.artist.name,
-                        "venue_image_link" : x.artist.image_link,
+                        "artist_id" : x.artist_id,
+                        "artist_name"  : x.artist.name,
+                        "artist_image_link" : x.artist.image_link,
                         "start_time" : "{}".format(x.start_time) 
                       }                    
                       for x in _upcoming_shows  
@@ -438,14 +438,15 @@ def show_artist(artist_id):
     "id": artist.id,
     "name": artist.name ,
     "genres": [artist.genres],
-    "city": artist.city,
-    "state": artist.state,
-    "phone": artist.phone,
-    "website": artist.website,
-    "facebook_link": artist.facebook_link,
-    "seeking_venue": artist.seeking_venue,
-    "seeking_description": artist.seeking_description,
-    "image_link": artist.image_link,
+    "address": venue.address,
+    "city": venue.city,
+    "state": venue.state,
+    "phone": venue.phone,
+    "website": venue.website,
+    "facebook_link": venue.facebook_link,
+    "seeking_talent": venue.seeking_talent,
+    "seeking_description": venue.seeking_description,
+    "image_link": venue.image_link,
     "past_shows": past_shows,
     "upcoming_shows": upcoming_shows,
     "past_shows_count": len(past_shows),
@@ -526,7 +527,7 @@ def show_artist(artist_id):
     "past_shows_count": 0,
     "upcoming_shows_count": 3,
   }
-  # data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
+  data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update

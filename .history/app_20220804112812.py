@@ -404,57 +404,6 @@ def search_artists():
 def show_artist(artist_id):
   # shows the artist page with the given artist_id
   # TODO: replace with real artist data from the artist table, using artist_id
-
-
-  artist = Artist.query.get(artist_id)  #.filter(person.name=="Nicanora") 
-  print(artist)
-
-  current_time = datetime.now(tz=timezone.utc)
-
-  _past_shows = list(filter(lambda it : it.start_time < current_time, artist.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, artist.shows)) 
-
-  past_shows = [
-                  { 
-                    "venue_id" : x.artist_id,
-                    "venue_name"  : x.artist.name,
-                    "venue_image_link" : x.artist.image_link,
-                    "start_time" : "{}".format(x.start_time) 
-                  }                    
-                  for x in _past_shows  
-               ]
-  
-  upcoming_shows = [
-                      { 
-                        "venue_id" : x.artist_id,
-                        "venue_name"  : x.artist.name,
-                        "venue_image_link" : x.artist.image_link,
-                        "start_time" : "{}".format(x.start_time) 
-                      }                    
-                      for x in _upcoming_shows  
-                   ]
-
-  data = {
-    "id": artist.id,
-    "name": artist.name ,
-    "genres": [artist.genres],
-    "city": artist.city,
-    "state": artist.state,
-    "phone": artist.phone,
-    "website": artist.website,
-    "facebook_link": artist.facebook_link,
-    "seeking_venue": artist.seeking_venue,
-    "seeking_description": artist.seeking_description,
-    "image_link": artist.image_link,
-    "past_shows": past_shows,
-    "upcoming_shows": upcoming_shows,
-    "past_shows_count": len(past_shows),
-    "upcoming_shows": upcoming_shows,
-    "upcoming_shows_count": len(upcoming_shows) ,
-  }
-
-
-
   data1={
     "id": 4,
     "name": "Guns N Petals",
@@ -526,7 +475,7 @@ def show_artist(artist_id):
     "past_shows_count": 0,
     "upcoming_shows_count": 3,
   }
-  # data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
+  data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update

@@ -417,8 +417,8 @@ def show_artist(artist_id):
   past_shows = [
                   { 
                     "venue_id" : x.artist_id,
-                    "venue_name"  : x.artist.name,
-                    "venue_image_link" : x.artist.image_link,
+                    "artist_name"  : x.artist.name,
+                    "artist_image_link" : x.artist.image_link,
                     "start_time" : "{}".format(x.start_time) 
                   }                    
                   for x in _past_shows  
@@ -428,7 +428,7 @@ def show_artist(artist_id):
                       { 
                         "venue_id" : x.artist_id,
                         "venue_name"  : x.artist.name,
-                        "venue_image_link" : x.artist.image_link,
+                        "artist_image_link" : x.artist.image_link,
                         "start_time" : "{}".format(x.start_time) 
                       }                    
                       for x in _upcoming_shows  
@@ -438,6 +438,7 @@ def show_artist(artist_id):
     "id": artist.id,
     "name": artist.name ,
     "genres": [artist.genres],
+    "address": venue.address,
     "city": artist.city,
     "state": artist.state,
     "phone": artist.phone,
@@ -526,7 +527,7 @@ def show_artist(artist_id):
     "past_shows_count": 0,
     "upcoming_shows_count": 3,
   }
-  # data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
+  data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update
