@@ -160,8 +160,8 @@ def show_venue(venue_id):
 
   current_time = datetime.now(tz=timezone.utc)
 
-  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.shows)) 
+  _past_shows = list(filter(lambda it : it.start_time > current_time, venue.shows))
+  _upcoming_shows = list(filter(lambda it : it.start_time < current_time, venue.shows)) 
 
   past_shows = [
                   { 

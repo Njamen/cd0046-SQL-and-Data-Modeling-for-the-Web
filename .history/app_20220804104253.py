@@ -160,8 +160,8 @@ def show_venue(venue_id):
 
   current_time = datetime.now(tz=timezone.utc)
 
-  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.shows)) 
+  _past_shows = list(filter(lambda it : it.start_time > current_time, venue.shows))
+  _upcoming_shows = list(filter(lambda it : it.start_time < current_time, venue.shows)) 
 
   past_shows = [
                   { 
@@ -178,7 +178,7 @@ def show_venue(venue_id):
                         "artist_id" : x.artist_id,
                         "artist_name"  : x.artist.name,
                         "artist_image_link" : x.artist.image_link,
-                        "start_time" : "{}".format(x.start_time) 
+                        "start_time" : x.start_time 
                       }                    
                       for x in _upcoming_shows  
                    ]
@@ -283,7 +283,7 @@ def show_venue(venue_id):
     "past_shows_count": 1,
     "upcoming_shows_count": 1,
   }
-  # data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
+  data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue

@@ -160,15 +160,15 @@ def show_venue(venue_id):
 
   current_time = datetime.now(tz=timezone.utc)
 
-  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.shows)) 
+  _past_shows = list(filter(lambda it : it.start_time > current_time, venue.shows))
+  _upcoming_shows = list(filter(lambda it : it.start_time < current_time, venue.shows)) 
 
   past_shows = [
                   { 
                     "artist_id" : x.artist_id,
                     "artist_name"  : x.artist.name,
                     "artist_image_link" : x.artist.image_link,
-                    "start_time" : "{}".format(x.start_time) 
+                    "start_time" : x.start_time 
                   }                    
                   for x in _past_shows  
                ]
@@ -178,7 +178,7 @@ def show_venue(venue_id):
                         "artist_id" : x.artist_id,
                         "artist_name"  : x.artist.name,
                         "artist_image_link" : x.artist.image_link,
-                        "start_time" : "{}".format(x.start_time) 
+                        "start_time" : x.start_time 
                       }                    
                       for x in _upcoming_shows  
                    ]
@@ -202,9 +202,6 @@ def show_venue(venue_id):
     "upcoming_shows": upcoming_shows,
     "upcoming_shows_count": len(upcoming_shows) ,
   }
-
-  print(data)
-
 
   data1={
     "id": 1,

@@ -155,56 +155,8 @@ def show_venue(venue_id):
   # shows the venue page with the given venue_id
   # TODO: replace with real venue data from the venues table, using venue_id
 
-  venue = Venue.query.get(venue_id)  #.filter(person.name=="Nicanora") 
-  print(venue)
-
-  current_time = datetime.now(tz=timezone.utc)
-
-  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.shows)) 
-
-  past_shows = [
-                  { 
-                    "artist_id" : x.artist_id,
-                    "artist_name"  : x.artist.name,
-                    "artist_image_link" : x.artist.image_link,
-                    "start_time" : "{}".format(x.start_time) 
-                  }                    
-                  for x in _past_shows  
-               ]
-  
-  upcoming_shows = [
-                      { 
-                        "artist_id" : x.artist_id,
-                        "artist_name"  : x.artist.name,
-                        "artist_image_link" : x.artist.image_link,
-                        "start_time" : "{}".format(x.start_time) 
-                      }                    
-                      for x in _upcoming_shows  
-                   ]
-
-  data = {
-    "id": venue.id,
-    "name": venue.name ,
-    "genres": [venue.genres],
-    "address": venue.address,
-    "city": venue.city,
-    "state": venue.state,
-    "phone": venue.phone,
-    "website": venue.website,
-    "facebook_link": venue.facebook_link,
-    "seeking_talent": venue.seeking_talent,
-    "seeking_description": venue.seeking_description,
-    "image_link": venue.image_link,
-    "past_shows": past_shows,
-    "upcoming_shows": upcoming_shows,
-    "past_shows_count": len(past_shows),
-    "upcoming_shows": upcoming_shows,
-    "upcoming_shows_count": len(upcoming_shows) ,
-  }
-
-  print(data)
-
+  venue = Venue.query.filter(Venue.id == venue_id).all()  #.filter(person.name=="Nicanora") 
+  print(venue{})
 
   data1={
     "id": 1,
@@ -283,7 +235,7 @@ def show_venue(venue_id):
     "past_shows_count": 1,
     "upcoming_shows_count": 1,
   }
-  # data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
+  data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue

@@ -160,15 +160,15 @@ def show_venue(venue_id):
 
   current_time = datetime.now(tz=timezone.utc)
 
-  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.shows)) 
+  _past_shows = list(filter(lambda it : it.start_time > current_time, venue.shows))
+  _upcoming_shows = list(filter(lambda it : it.start_time < current_time, venue.shows)) 
 
   past_shows = [
                   { 
                     "artist_id" : x.artist_id,
                     "artist_name"  : x.artist.name,
                     "artist_image_link" : x.artist.image_link,
-                    "start_time" : "{}".format(x.start_time) 
+                    "start_time" : x.start_time 
                   }                    
                   for x in _past_shows  
                ]
@@ -178,7 +178,7 @@ def show_venue(venue_id):
                         "artist_id" : x.artist_id,
                         "artist_name"  : x.artist.name,
                         "artist_image_link" : x.artist.image_link,
-                        "start_time" : "{}".format(x.start_time) 
+                        "start_time" : x.start_time 
                       }                    
                       for x in _upcoming_shows  
                    ]
@@ -196,15 +196,16 @@ def show_venue(venue_id):
     "seeking_talent": venue.seeking_talent,
     "seeking_description": venue.seeking_description,
     "image_link": venue.image_link,
-    "past_shows": past_shows,
+    "past_shows": [{
+      "artist_id": 4,
+      "artist_name": "Guns N Petals",
+      "artist_image_link": "https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "start_time": "2019-05-21T21:30:00.000Z"
+    }],
     "upcoming_shows": upcoming_shows,
-    "past_shows_count": len(past_shows),
-    "upcoming_shows": upcoming_shows,
-    "upcoming_shows_count": len(upcoming_shows) ,
+    "past_shows_count": len(),
+    "upcoming_shows_count": len(list(filter(lambda it : it.start_time > current_time, venue.shows))) ,
   }
-
-  print(data)
-
 
   data1={
     "id": 1,
@@ -283,7 +284,7 @@ def show_venue(venue_id):
     "past_shows_count": 1,
     "upcoming_shows_count": 1,
   }
-  # data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
+  data = list(filter(lambda d: d['id'] == venue_id, [data1, data2, data3]))[0]
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue
