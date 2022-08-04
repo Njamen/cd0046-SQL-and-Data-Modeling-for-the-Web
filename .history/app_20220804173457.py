@@ -653,15 +653,15 @@ def shows():
   data = [ {
     "venue_id": it.venue_id ,
     "venue_name": it.venue.name,
-    "artist_id": it.artist_id,
-    "artist_name": it.artist.name,
-    "artist_image_link": it.artist.image_link ,
-    "start_time": "{}".format(it.start_time) 
+    "artist_id": it.,
+    "artist_name": "Guns N Petals",
+    "artist_image_link": "https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+    "start_time": "2019-05-21T21:30:00.000Z" 
     }   for it in all_shows
   ]
 
 
-  datas=[{
+  data=[{
     "venue_id": 1,
     "venue_name": "The Musical Hop",
     "artist_id": 4,
@@ -710,41 +710,12 @@ def create_show_submission():
   # called to create new shows in the db, upon submitting new show listing form
   # TODO: insert form data as a new Show record in the db, instead
 
-  try: 
-
-    show = Show (
-      artist_id =  request.form['artist_id'],
-      venue_id =  request.form['venue_id'],
-      start_time =  request.form['start_time']      
-    )  
-
-    print(show)
-
-    db.session.add(show)
-    db.session.commit()
-    flash('show  was successfully listed!')
-    db.session.close()
-    # return render_template('pages/shows.html')
-    return redirect(url_for('shows'))
-
-
-  except Exception as e:
-    db.session.rollback()
-    error=True
-    print(e)
-    flash('An error occurred. show could not be listed.')
-    form = ShowForm() 
-    return render_template('forms/new_show.html', form=form)
-    db.session.close()
-
-  
-
   # on successful db insert, flash success
-  # flash('Show was successfully listed!')
+  flash('Show was successfully listed!')
   # TODO: on unsuccessful db insert, flash an error instead.
   # e.g., flash('An error occurred. Show could not be listed.')
   # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
-  # return render_template('pages/home.html')
+  return render_template('pages/home.html')
 
 @app.errorhandler(404)
 def not_found_error(error):

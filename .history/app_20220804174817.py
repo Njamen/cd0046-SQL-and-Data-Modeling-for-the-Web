@@ -710,41 +710,50 @@ def create_show_submission():
   # called to create new shows in the db, upon submitting new show listing form
   # TODO: insert form data as a new Show record in the db, instead
 
-  try: 
+  try:
+    if( request.form.get('seeking_venue', "n") == "y" ) :
+      seeking_venue =  True
+    else :
+      seeking_venue = False
 
-    show = Show (
+    artist = Artist (
       artist_id =  request.form['artist_id'],
       venue_id =  request.form['venue_id'],
-      start_time =  request.form['start_time']      
+      state =  request.form['start_time'],
+      phone =  request.form.get('phone', None),
+      genres =  request.form['genres'],
+      facebook_link =  request.form.get('facebook_link', None),
+      image_link = request.form.get('image_link', None),
+      website =  request.form.get('website_link', None),
+      seeking_venue = seeking_venue,
+      seeking_description =  request.form.get('seeking_description', None)
     )  
 
-    print(show)
+    print(artist)
 
-    db.session.add(show)
+    db.session.add(artist)
     db.session.commit()
-    flash('show  was successfully listed!')
+    flash('Artist ' + request.form['name'] + ' was successfully listed!')
     db.session.close()
-    # return render_template('pages/shows.html')
-    return redirect(url_for('shows'))
-
+    return render_template('pages/home.html')
 
   except Exception as e:
     db.session.rollback()
     error=True
     print(e)
-    flash('An error occurred. show could not be listed.')
-    form = ShowForm() 
-    return render_template('forms/new_show.html', form=form)
+    flash('An error occurred. Venue ' + request.form['name'] + ' could not be listed.')
+    form = ArtistForm() 
+    return render_template('forms/new_artist.html', form=form)
     db.session.close()
 
   
 
   # on successful db insert, flash success
-  # flash('Show was successfully listed!')
+  flash('Show was successfully listed!')
   # TODO: on unsuccessful db insert, flash an error instead.
   # e.g., flash('An error occurred. Show could not be listed.')
   # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
-  # return render_template('pages/home.html')
+  return render_template('pages/home.html')
 
 @app.errorhandler(404)
 def not_found_error(error):

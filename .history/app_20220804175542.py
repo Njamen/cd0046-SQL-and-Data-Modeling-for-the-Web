@@ -724,16 +724,14 @@ def create_show_submission():
     db.session.commit()
     flash('show  was successfully listed!')
     db.session.close()
-    # return render_template('pages/shows.html')
-    return redirect(url_for('shows'))
-
+    return render_template('pages/shows.html')
 
   except Exception as e:
     db.session.rollback()
     error=True
     print(e)
     flash('An error occurred. show could not be listed.')
-    form = ShowForm() 
+    form = S() 
     return render_template('forms/new_show.html', form=form)
     db.session.close()
 

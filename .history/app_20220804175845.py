@@ -724,8 +724,8 @@ def create_show_submission():
     db.session.commit()
     flash('show  was successfully listed!')
     db.session.close()
-    # return render_template('pages/shows.html')
-    return redirect(url_for('shows'))
+    return render_template('pages/shows.html')
+      return redirect(url_for('show_artist', artist_id=artist_id))
 
 
   except Exception as e:

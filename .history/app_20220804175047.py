@@ -710,7 +710,8 @@ def create_show_submission():
   # called to create new shows in the db, upon submitting new show listing form
   # TODO: insert form data as a new Show record in the db, instead
 
-  try: 
+  try:
+
 
     show = Show (
       artist_id =  request.form['artist_id'],
@@ -724,16 +725,14 @@ def create_show_submission():
     db.session.commit()
     flash('show  was successfully listed!')
     db.session.close()
-    # return render_template('pages/shows.html')
-    return redirect(url_for('shows'))
-
+    return render_template('pages/shows.html')
 
   except Exception as e:
     db.session.rollback()
     error=True
     print(e)
     flash('An error occurred. show could not be listed.')
-    form = ShowForm() 
+    form = ArtistForm() 
     return render_template('forms/new_show.html', form=form)
     db.session.close()
 
