@@ -144,7 +144,7 @@ def search_venues():
 
   search_term =  request.form.get('search_term', "")
   pattern = "%{}%".format(search_term)   
-  found_items = Venue.query.filter(Venue.name.ilike(pattern)).all()
+  found_items = Venue.query.filter(Venue.name.like(pattern)).all()
   current_time = datetime.now(tz=timezone.utc)
 
   # print(found)
@@ -388,7 +388,7 @@ def search_artists():
 
   search_term =  request.form.get('search_term', "")
   pattern = "%{}%".format(search_term)   
-  found_items = Artist.query.filter(Artist.name.ilike(pattern)).all()
+  found_items = Artist.query.filter(Artist.name.like(pattern)).all()
   current_time = datetime.now(tz=timezone.utc)
 
   # print(found)

@@ -144,7 +144,7 @@ def search_venues():
 
   search_term =  request.form.get('search_term', "")
   pattern = "%{}%".format(search_term)   
-  found_items = Venue.query.filter(Venue.name.ilike(pattern)).all()
+  found_items = Venue.query.filter(Venue.name.like(pattern)).all()
   current_time = datetime.now(tz=timezone.utc)
 
   # print(found)
@@ -388,7 +388,7 @@ def search_artists():
 
   search_term =  request.form.get('search_term', "")
   pattern = "%{}%".format(search_term)   
-  found_items = Artist.query.filter(Artist.name.ilike(pattern)).all()
+  found_items = Venue.query.filter(Venue.name.like(pattern)).all()
   current_time = datetime.now(tz=timezone.utc)
 
   # print(found)
@@ -402,6 +402,15 @@ def search_artists():
     } for it in found_items ]
   }
 
+
+  response={
+    "count": 1,
+    "data": [{
+      "id": 4,
+      "name": "Guns N Petals",
+      "num_upcoming_shows": 0,
+    }]
+  }
   return render_template('pages/search_artists.html', results=response, search_term=request.form.get('search_term', ''))
 
 @app.route('/artists/<int:artist_id>')

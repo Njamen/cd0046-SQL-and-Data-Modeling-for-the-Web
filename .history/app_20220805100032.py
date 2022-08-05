@@ -141,23 +141,14 @@ def search_venues():
   # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
   # seach for Hop should return "The Musical Hop".
   # search for "Music" should return "The Musical Hop" and "Park Square Live Music & Coffee"
-
-  search_term =  request.form.get('search_term', "")
-  pattern = "%{}%".format(search_term)   
-  found_items = Venue.query.filter(Venue.name.ilike(pattern)).all()
-  current_time = datetime.now(tz=timezone.utc)
-
-  # print(found)
-
   response={
-    "count": len(found_items),
+    "count": 1,
     "data": [{
-      "id": it.id,
-      "name":it.name,
-      "num_upcoming_shows": len(list(filter(lambda x : x.start_time > current_time, it.shows))) ,
-    } for it in found_items ]
+      "id": 2,
+      "name": "The Dueling Pianos Bar",
+      "num_upcoming_shows": 0,
+    }]
   }
-
   return render_template('pages/search_venues.html', results=response, search_term=request.form.get('search_term', ''))
 
 @app.route('/venues/<int:venue_id>')
@@ -373,9 +364,24 @@ def artists():
 
   all_artist = Artist.query.with_entities(Artist.id, Artist.name).all()  #.filter(person.name=="Nicanora") 
 
+  # print(all_artist[0].venue)
+  # print(all_artist[0].shows)
+
+
+# with_entities(Artist.id, Artist.name).
+
   data = [dict(v) for v in all_artist]
 
-
+  # data2=[{
+  #   "id": 4,
+  #   "name": "Guns N Petals",
+  # }, {
+  #   "id": 5,
+  #   "name": "Matt Quevedo",
+  # }, {
+  #   "id": 6,
+  #   "name": "The Wild Sax Band",
+  # }] 
 
 
   return render_template('pages/artists.html', artists=data)
@@ -385,23 +391,14 @@ def search_artists():
   # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
   # seach for "A" should return "Guns N Petals", "Matt Quevado", and "The Wild Sax Band".
   # search for "band" should return "The Wild Sax Band".
-
-  search_term =  request.form.get('search_term', "")
-  pattern = "%{}%".format(search_term)   
-  found_items = Artist.query.filter(Artist.name.ilike(pattern)).all()
-  current_time = datetime.now(tz=timezone.utc)
-
-  # print(found)
-
   response={
-    "count": len(found_items),
+    "count": 1,
     "data": [{
-      "id": it.id,
-      "name":it.name,
-      "num_upcoming_shows": len(list(filter(lambda x : x.start_time > current_time, it.shows))) ,
-    } for it in found_items ]
+      "id": 4,
+      "name": "Guns N Petals",
+      "num_upcoming_shows": 0,
+    }]
   }
-
   return render_template('pages/search_artists.html', results=response, search_term=request.form.get('search_term', ''))
 
 @app.route('/artists/<int:artist_id>')
