@@ -221,6 +221,9 @@ def create_venue_submission():
   finally:
     db.session.close()
 
+
+
+
   # on successful db insert, flash success
   # TODO: on unsuccessful db insert, flash an error instead.
   # e.g., flash('An error occurred. Venue ' + data.name + ' could not be listed.')
@@ -234,6 +237,7 @@ def delete_venue(venue_id):
   # TODO: Complete this endpoint for taking a venue_id, and using
   # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
 
+  print("deleting Venue .... ")
   
   try:
     venue = Venue.query.get(venue_id) 
@@ -264,6 +268,9 @@ def artists():
 
   data = [dict(v) for v in all_artist]
 
+
+
+
   return render_template('pages/artists.html', artists=data)
 
 @app.route('/artists/search', methods=['POST'])
@@ -276,6 +283,8 @@ def search_artists():
   pattern = "%{}%".format(search_term)   
   found_items = Artist.query.filter(Artist.name.ilike(pattern)).all()
   current_time = datetime.now(tz=timezone.utc)
+
+  # print(found)
 
   response={
     "count": len(found_items),
@@ -294,7 +303,8 @@ def show_artist(artist_id):
   # TODO: replace with real artist data from the artist table, using artist_id
 
 
-  artist = Artist.query.get(artist_id)  
+  artist = Artist.query.get(artist_id)  #.filter(person.name=="Nicanora") 
+  print(artist)
 
   current_time = datetime.now(tz=timezone.utc)
 
@@ -340,6 +350,8 @@ def show_artist(artist_id):
     "upcoming_shows_count": len(upcoming_shows) ,
   }
 
+
+  # data = list(filter(lambda d: d['id'] == artist_id, [data1, data2, data3]))[0]
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update
@@ -360,7 +372,10 @@ def edit_artist(artist_id):
   form.seeking_description.data = artist.seeking_description
   form.genres.data = [2,3] 
   form.state.default =  "ID"
- 
+
+
+  
+
   # TODO: populate form with fields from artist with ID <artist_id>
   return render_template('forms/edit_artist.html', form=form, artist=artist)
 
@@ -369,8 +384,11 @@ def edit_artist_submission(artist_id):
   # TODO: take values from the form submitted, and update existing
   # artist record with ID <artist_id> using the new attributes
 
+
   try:
     artist = Artist.query.get(artist_id) 
+
+
 
     if( request.form.get('seeking_talent', "n") == "y" ) :
       seeking_venue =  True
@@ -390,7 +408,9 @@ def edit_artist_submission(artist_id):
     artist.seeking_description =  request.form.get('seeking_description', None)  
 
     db.session.commit()
+    # db.session.close()
     flash('Artist  was successfully updated!')
+    # return render_template('pages/home.html')
     return redirect(url_for('show_artist', artist_id=artist_id))
 
 
@@ -419,8 +439,8 @@ def edit_venue(venue_id):
   form.website_link.data = venue.website
   form.seeking_talent.data =  venue.seeking_talent
   form.seeking_description.data = venue.seeking_description
-  # form.genres.data = [2,3] 
-  # form.state.default =  "ID"
+  form.genres.data = [2,3] 
+  form.state.default =  "ID"
 
 
   # TODO: populate form with values from venue with ID <venue_id>
@@ -432,7 +452,9 @@ def edit_venue_submission(venue_id):
   # venue record with ID <venue_id> using the new attributes
 
   try:
-    venue = Venue.query.get(venue_id)  
+    venue = Venue.query.get(venue_id) 
+
+
 
     if( request.form.get('seeking_talent', "n") == "y" ) :
       seeking_talent =  True

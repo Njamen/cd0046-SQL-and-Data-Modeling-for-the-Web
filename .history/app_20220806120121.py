@@ -420,7 +420,7 @@ def edit_venue(venue_id):
   form.seeking_talent.data =  venue.seeking_talent
   form.seeking_description.data = venue.seeking_description
   # form.genres.data = [2,3] 
-  # form.state.default =  "ID"
+  form.state.default =  "ID"
 
 
   # TODO: populate form with values from venue with ID <venue_id>
@@ -432,7 +432,9 @@ def edit_venue_submission(venue_id):
   # venue record with ID <venue_id> using the new attributes
 
   try:
-    venue = Venue.query.get(venue_id)  
+    venue = Venue.query.get(venue_id) 
+
+
 
     if( request.form.get('seeking_talent', "n") == "y" ) :
       seeking_talent =  True

@@ -432,7 +432,9 @@ def edit_venue_submission(venue_id):
   # venue record with ID <venue_id> using the new attributes
 
   try:
-    venue = Venue.query.get(venue_id)  
+    venue = Venue.query.get(venue_id) 
+
+
 
     if( request.form.get('seeking_talent', "n") == "y" ) :
       seeking_talent =  True
