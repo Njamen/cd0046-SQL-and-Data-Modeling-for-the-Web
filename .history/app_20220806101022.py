@@ -596,7 +596,7 @@ def edit_venue_submission(venue_id):
     venue.facebook_link =  request.form.get('facebook_link', None)
     venue.image_link = request.form.get('image_link', None)
     venue.website =  request.form.get('website_link', None)
-    venue.seeking_talent = seeking_talent
+    venue.seeking_talent = seeking_talent,
     venue.seeking_description =  request.form.get('seeking_description', None)  
 
     db.session.commit()

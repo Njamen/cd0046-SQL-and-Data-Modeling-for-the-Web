@@ -71,6 +71,14 @@ class Artist(db.Model):
                   facebook_link: {self.facebook_link} >''' 
 
 
+# class Show(db.Model):
+#     __tablename__ = 'Shows'
+    
+#     venue_id = db.Column(db.Integer, db.ForeignKey(Venue.id), nullable=False, primary_key=True)
+#     artist_id = db.Column(db.Integer, db.ForeignKey(Artist.id), nullable=False, primary_key=True)
+#     start_time = db.Column(db.DateTime(timezone=True), primary_key=True)
+#     artist = db.relationship(Artist, backref='list', lazy=False)
+#     Venue = db.relationship(Venue, backref='list', lazy=False)
 
 
 # TODO: implement any missing fields, as a database migration using Flask-Migrate
