@@ -10,13 +10,13 @@ from sqlalchemy.orm import  backref
 
 
 class Show(db.Model):
-    __tablename__ = 'shows'
+    __tablename__ = 'Show'
     venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'), primary_key=True)
     artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'), primary_key=True)
-    start_time = db.Column(db.DateTime() , primary_key=True) 
+    start_time = db.Column(db.DateTime(timezone=True) , primary_key=True) 
 
-    artist = db.relationship("Artist", backref=backref("shows", cascade="all, delete-orphan" ))
-    venue = db.relationship("Venue", backref=backref("shows", cascade="all, delete-orphan" ))
+    artist = db.relationship("Artist", backref=backref("Show", cascade="all, delete-orphan" ))
+    venue = db.relationship("Venue", backref=backref("Show", cascade="all, delete-orphan" ))
  
 
 
@@ -35,7 +35,7 @@ class Venue(db.Model):
     seeking_description = db.Column(db.String(200), default = "" )  
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))     
-    artist = db.relationship("Artist", secondary="shows", lazy=False)
+    artist = db.relationship("Artist", secondary="Show", lazy=False)
 
     def __repr__(self):
       return f'''<Venue ID: {self.id},\n   name: {self.name }, genres: {self.genres}, 
@@ -60,7 +60,7 @@ class Artist(db.Model):
     seeking_venue = db.Column( db.Boolean(), default=False, nullable=False ) 
     website =  db.Column(db.String(120))   
     seeking_description = db.Column(db.String(200), default = "" )  
-    venue = db.relationship("Venue", secondary="shows", lazy=False)
+    venue = db.relationship("Venue", secondary="Show", lazy=False)
 
 
     def __repr__(self):

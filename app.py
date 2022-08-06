@@ -76,11 +76,9 @@ def venues():
   #       num_upcoming_shows should be aggregated based on number of upcoming shows per venue.
 
   all_Venue = Venue.query.all()  #.filter(person.name=="Nicanora") 
-  # for v in all_Venue :
-  #   print(v.shows) 
+
 
   all_city_state = Venue.query.with_entities(Venue.city, Venue.state).distinct().all() 
-  # current_time = datetime.utcnow()
   current_time = datetime.now(tz=timezone.utc)
 
 
@@ -92,49 +90,14 @@ def venues():
       "venues" : [] 
     }
     for venue in all_Venue :
-      # print(venue.shows)
-      # show_time = venue.shows[0].start_time 
       if ( city_state.city == venue.city and city_state.state == venue.state ) : 
         dict["venues"].append({
           "id" : venue.id,
           "name" : venue.name,
-          "num_upcoming_shows" : len(list(filter(lambda it : it.start_time > current_time, venue.shows))) 
+          "num_upcoming_shows" : len(list(filter(lambda it : it.start_time > current_time, venue.Show))) 
         })    
-      # print("_____======_____" )
-      # print((current_time))
-      # print((show_time))
-      # tof = (current_time > show_time )
-      # print(tof)
     data.append(dict)    
-  print(data)
 
-
-  # all_Venue = Venue.query.with_entities(Venue.city, Venue.state, Venue.ve)
-  #                        .all()  #.filter(person.name=="Nicanora") 
-
-  # data = [dict(v) for v in all_artist]
-
-  datas=[{
-    "city": "San Francisco",
-    "state": "CA",
-    "venues": [{
-      "id": 1,
-      "name": "The Musical Hop",
-      "num_upcoming_shows": 0,
-    }, {
-      "id": 3,
-      "name": "Park Square Live Music & Coffee",
-      "num_upcoming_shows": 1,
-    }]
-  }, {
-    "city": "New York",
-    "state": "NY",
-    "venues": [{
-      "id": 2,
-      "name": "The Dueling Pianos Bar",
-      "num_upcoming_shows": 0,
-    }]
-  }]
   return render_template('pages/venues.html', areas=data);
 
 @app.route('/venues/search', methods=['POST'])
@@ -155,7 +118,7 @@ def search_venues():
     "data": [{
       "id": it.id,
       "name":it.name,
-      "num_upcoming_shows": len(list(filter(lambda x : x.start_time > current_time, it.shows))) ,
+      "num_upcoming_shows": len(list(filter(lambda x : x.start_time > current_time, it.Show))) ,
     } for it in found_items ]
   }
 
@@ -171,8 +134,8 @@ def show_venue(venue_id):
 
   current_time = datetime.now(tz=timezone.utc)
 
-  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.shows)) 
+  _past_shows = list(filter(lambda it : it.start_time < current_time, venue.Show))
+  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, venue.Show)) 
 
   past_shows = [
                   { 
@@ -416,7 +379,7 @@ def search_artists():
     "data": [{
       "id": it.id,
       "name":it.name,
-      "num_upcoming_shows": len(list(filter(lambda x : x.start_time > current_time, it.shows))) ,
+      "num_upcoming_shows": len(list(filter(lambda x : x.start_time > current_time, it.Show))) ,
     } for it in found_items ]
   }
 
@@ -433,8 +396,8 @@ def show_artist(artist_id):
 
   current_time = datetime.now(tz=timezone.utc)
 
-  _past_shows = list(filter(lambda it : it.start_time < current_time, artist.shows))
-  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, artist.shows)) 
+  _past_shows = list(filter(lambda it : it.start_time < current_time, artist.Show))
+  _upcoming_shows = list(filter(lambda it : it.start_time > current_time, artist.Show)) 
 
   past_shows = [
                   { 
